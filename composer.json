@@ -7,5 +7,11 @@
             "email": "jhordan.kendy1@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/Core/"
+        }
+
+    },
     "require": {}
 }
