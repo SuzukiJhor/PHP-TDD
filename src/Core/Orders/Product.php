@@ -15,4 +15,12 @@ class Product
     {
         return $this->price * $this->total;
     }
+
+    public function totalCalcPorcent()
+    {
+        $total = $this->price * $this->total;
+        $taxa = $total * 0.1;
+
+        return $total + $taxa;
+    }
 }

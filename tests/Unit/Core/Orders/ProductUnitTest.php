@@ -21,4 +21,15 @@ class ProductUnitTest extends TestCase
 
         $this->assertTrue(true);
     }
+
+    public function testCalcPorcent()
+    {
+        $product = new Product(
+            name: 'prodx',
+            price: 100,
+            total: 2
+        );
+
+        $this->assertEquals(220, $product->totalCalcPorcent());
+    }
 }
