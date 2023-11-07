@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Tests\Core\Payment;
 
@@ -13,10 +13,25 @@ class PaymentUnitTest extends TestCase
     public function testCategory()
     {
         $mockPayment = Mockery::mock(stdClass::class, PaymentInterface::class);
+        $mockPayment
+            ->shouldReceive('makePayment')
+            ->once(1)
+            ->andReturn(true);
+            
+        $mockPayment
+            ->shouldReceive('createPlan')
+            ->andReturn(true);
 
         $payment =  new PaymentController($mockPayment);
-        $payment->execute();
-        
-        $this->assertTrue(true);
+        $response =  $payment->execute();
+
+        $this->assertTrue($response);
+    }
+
+    protected function tearDown(): void
+    {
+        Mockery::close();
+
+        parent::tearDown();
     }
 }
