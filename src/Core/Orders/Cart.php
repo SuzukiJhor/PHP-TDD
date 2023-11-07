@@ -13,13 +13,13 @@ class Cart
 
     public function add(Product $product)
     {
-        $items = $this->getItems();
-
-        foreach($items as $item) {
-            
-        }
-       
-        array_push($this->items, $product);
+        $getId = $product->getId();
+        $qtd = isset($this->items[$getId]) ? $this->items[$getId]['qtd'] + 1 : 1;
+     
+        $this->items[$getId] =  [
+            'qtd'=> $qtd,
+            'product'=> $product
+        ];
     }
 
     public function getItems(): array
@@ -29,7 +29,14 @@ class Cart
 
     public function total(): float
     {
-        return 44;
+        $total = 0;
+
+        foreach ($this->items as $item) {
+            $product = $item['product'];
+            $total += $product->getPrice() * $item['qtd'];
+        }
+        return $total;
+    
     }
 
 }

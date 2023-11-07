@@ -12,32 +12,41 @@ class CartUnitTest extends TestCase
     {
         $cart = new Cart();
 
-        $cart->add(product: new Product(
+        $product1 = new Product(
             id: '1',
             name: 'test',
             price: 12,
             total: 1,
     
-        ));
+        );
         
-        $cart->add(product: new Product(
-            id: '1',
-            name: 'test',
-            price: 12,
-            total: 1,
-    
-        ));
-
+        $cart->add($product1);
+        $cart->add($product1);
         $cart->add(product: new Product(
             id: '2',
-            name: 'test',
+            name: 'test2',
             price: 20,
             total: 1,
     
         ));
 
-        $this->assertCount(3, $cart->getItems());
+        $cart->add(product: new Product(
+            id: '3',
+            name: 'test3',
+            price: 10,
+            total: 1,
+    
+        ));
 
-        $this->assertEquals(44, $cart->total());
+        $this->assertCount(3, $cart->getItems());
+        $this->assertEquals(54, $cart->total());
+    }
+
+    public function testCartEmpty()
+    {
+        $cart = new Cart();
+
+        $this->assertCount(0, $cart->getItems());
+        $this->assertEquals(0, $cart->total());
     }
 }
